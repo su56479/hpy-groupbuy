@@ -1,0 +1,94 @@
+html,
+body,
+#app {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC',
+    'Hiragino Sans GB', 'Microsoft YaHei', Arial, sans-serif;
+  background-color: #F6F8FB;
+  color: #1D2129;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* ===== 蓝白主题令牌 ===== */
+:root {
+  --adm-primary: #1677FF;
+  --adm-primary-light: #4096FF;
+  --adm-grad: linear-gradient(135deg, #1677FF 0%, #4096FF 100%);
+  --adm-white: #FFFFFF;
+  --adm-bg: #F6F8FB;
+  --adm-text-1: #1D2129;
+  --adm-text-2: #4E5969;
+  --adm-text-3: #86909C;
+  --adm-line: #E5E6EB;
+}
+
+/* Element Plus 全局蓝白主题覆盖 */
+.el-button--primary {
+  background: var(--adm-grad) !important;
+  border: none !important;
+  box-shadow: 0 4px 14px rgba(22, 119, 255, 0.22) !important;
+}
+.el-button--primary:hover {
+  filter: brightness(1.05);
+}
+.el-tag--danger { background: #F53F3F !important; border: none !important; color: #fff !important; }
+.el-tag--warning { background: #FF7D00 !important; border: none !important; color: #fff !important; }
+
+/* 卡片柔光阴影统一 */
+.el-card {
+  border: none !important;
+  border-radius: 14px !important;
+  box-shadow: 0 4px 16px rgba(22, 119, 255, 0.06) !important;
+  background: #fff;
+}
+
+/* 表格移动端可横滚 + 蓝白表头 */
+.el-table { border-radius: 12px; }
+.el-table th.el-table__cell {
+  background: linear-gradient(180deg, #E8F3FF 0%, #F6FAFF 100%) !important;
+  color: #1677FF;
+  font-weight: 700;
+}
+
+/* 输入框聚焦蓝 */
+.el-input__wrapper.is-focus {
+  box-shadow: 0 0 0 1px #1677FF inset !important;
+}
+
+/* ===== 移动端适配（≤ 768px） ===== */
+@media (max-width: 768px) {
+  .el-dialog {
+    width: 94vw !important;
+    margin: 3vh auto 0 !important;
+  }
+  .el-form-item {
+    display: block !important;
+  }
+  .el-form-item__label {
+    width: 100% !important;
+    text-align: left !important;
+    justify-content: flex-start !important;
+    padding-bottom: 4px !important;
+    margin-bottom: 0 !important;
+  }
+  .el-form-item__content {
+    width: 100% !important;
+    margin-left: 0 !important;
+  }
+  /* 表格变成横滚模式，避免手机上挤压 */
+  .el-table__inner-wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .el-card__body { padding: 12px !important; }
+}

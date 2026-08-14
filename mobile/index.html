@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+    <meta name="theme-color" content="#1677FF" />
+    <title>好朋友集市</title>
+    <script>
+      // 兼容后端支付页硬跳转：将 /m/<path> 无 hash 的 URL 转换为 hash 路由
+      // 例如后端支付成功后会跳转 /m/payment-result?order_no=xxx&status=success
+      // 这里把它转成 /m/#/payment-result?order_no=xxx&status=success 以匹配 hash 路由
+      (function () {
+        var loc = window.location;
+        var m = '/m/';
+        if (loc.pathname.indexOf(m) === 0 && loc.pathname !== m && !loc.hash) {
+          var sub = loc.pathname.slice(m.length).replace(/\/+$/, '');
+          if (sub) {
+            var hash = sub.charAt(0) === '/' ? sub : '/' + sub;
+            loc.replace(loc.origin + m + '#' + hash + loc.search);
+          }
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

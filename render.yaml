@@ -1,0 +1,33 @@
+# ============================================================
+#  Render 一键部署配置（好朋友市集团购商城 · 后端 API 服务）
+#
+#  使用方法：
+#    1. 打开 https://render.com → 用 GitHub 登录
+#    2. New → "Blueprint" 或 "Web Service" → 选择你的仓库
+#    3. 选择本文件（render.yaml）即可一键部署
+#
+#  部署后得到的公网地址（例如 https://hpy-server.onrender.com）
+#  填入 GitHub 仓库的 Settings → Variables → VITE_API_BASE
+#  再次触发 Actions 即可让 Pages 前端自动连接到这个后端
+# ============================================================
+
+services:
+  - type: web
+    name: hpy-groupbuy-server
+    runtime: node
+    region: singapore  # 新加坡节点（国内访问相对较快）
+    plan: free         # Render 免费套餐，闲置会冷启动（首次访问稍慢几秒）
+    rootDir: server
+    buildCommand: npm install --no-audit --no-fund
+    startCommand: node src/index.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: '3000'
+    # SQLite 文件会存在 Render 的本地磁盘（注意：free 套餐磁盘为临时，重启会丢失）
+    # 如需数据持久化，可升级到 Starter 套餐（$7/月）挂载 Disk，或改用 Railway/PlanetScale
+    disk:
+      name: hpy-data
+      mountPath: /opt/render/project/src/server/data
+      sizeGB: 1

@@ -1,0 +1,596 @@
+:root {
+  /* ===== Design Tokens: 好朋友集市 高级蓝白体系 ===== */
+  /* 主色：AntD #1677FF + 过渡浅蓝 #4096FF */
+  --hpy-primary: #1677FF;
+  --hpy-primary-light: #4096FF;
+  --hpy-primary-soft: #E8F3FF;
+  --hpy-primary-lines: #BFDBFF;
+
+  /* 中性：白 + 灰阶 */
+  --hpy-white: #FFFFFF;
+  --hpy-bg: #F5F7FA;
+  --hpy-bg-card: #FFFFFF;
+  --hpy-text-1: #1D2129;
+  --hpy-text-2: #4E5969;
+  --hpy-text-3: #86909C;
+  --hpy-line: #F2F3F5;
+
+  /* 点缀（严格限制使用：仅标签/价格/告警） */
+  --hpy-red: #F53F3F;
+  --hpy-orange: #FF7D00;
+  --hpy-green: #00B42A;
+  --hpy-gold: #FF9A2E;
+
+  /* 圆角体系 */
+  --hpy-radius-xs: 6px;
+  --hpy-radius-sm: 8px;
+  --hpy-radius-md: 12px;
+  --hpy-radius-lg: 16px;
+  --hpy-radius-xl: 20px;
+  --hpy-radius-pill: 999px;
+
+  /* 高级柔光阴影（严格禁止重黑阴影） */
+  --hpy-shadow-xs: 0 1px 4px rgba(22, 119, 255, 0.04);
+  --hpy-shadow-sm: 0 2px 8px rgba(22, 119, 255, 0.06);
+  --hpy-shadow-md: 0 6px 20px rgba(22, 119, 255, 0.08);
+  --hpy-shadow-lg: 0 12px 32px rgba(22, 119, 255, 0.10);
+
+  /* 渐变体系（核心高级感来源） */
+  --hpy-grad-primary: linear-gradient(135deg, #1677FF 0%, #4096FF 100%);
+  --hpy-grad-primary-rev: linear-gradient(135deg, #4096FF 0%, #1677FF 100%);
+  --hpy-grad-hero: linear-gradient(135deg, #E8F3FF 0%, #FFFFFF 65%, #FFFFFF 100%);
+  --hpy-grad-hero-deep: linear-gradient(135deg, #D6E8FF 0%, #F0F7FF 55%, #FFFFFF 100%);
+  --hpy-grad-icon: linear-gradient(135deg, #E8F3FF 0%, #D2E6FF 100%);
+  --hpy-grad-code: linear-gradient(135deg, #E8F3FF 0%, #F0F7FF 100%);
+  --hpy-grad-btn: linear-gradient(135deg, #1677FF 0%, #4096FF 100%);
+  --hpy-grad-success: linear-gradient(180deg, #1677FF 0%, #0E5FD9 100%);
+
+  /* 字体字重 */
+  --hpy-fw-bold: 800;
+  --hpy-fw-semi: 700;
+  --hpy-fw-med: 500;
+  --hpy-fw-reg: 400;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--hpy-bg);
+  color: var(--hpy-text-1);
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Helvetica Neue",
+    "Segoe UI", Arial, "Microsoft YaHei", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+#app {
+  min-height: 100vh;
+  background: var(--hpy-bg);
+}
+
+a { color: inherit; text-decoration: none; }
+
+/* ====== 工具类：页面通用 ====== */
+.page-wrap {
+  width: 100%;
+  min-height: 100vh;
+  background: var(--hpy-bg);
+  padding-bottom: 16px;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 16px 12px;
+}
+.section-header .title {
+  font-size: 17px;
+  font-weight: var(--hpy-fw-bold);
+  color: var(--hpy-text-1);
+  letter-spacing: 0.3px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.section-header .title::before {
+  content: "";
+  display: inline-block;
+  width: 4px;
+  height: 18px;
+  border-radius: 4px;
+  background: var(--hpy-grad-primary);
+}
+.section-header .more {
+  font-size: 13px;
+  color: var(--hpy-primary);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+/* ====== 工具类：卡片 ====== */
+.card-lg {
+  background: var(--hpy-bg-card);
+  border-radius: var(--hpy-radius-lg);
+  box-shadow: var(--hpy-shadow-md);
+  margin: 12px;
+  overflow: hidden;
+}
+.card-md {
+  background: var(--hpy-bg-card);
+  border-radius: var(--hpy-radius-md);
+  box-shadow: var(--hpy-shadow-sm);
+  margin: 10px 12px;
+  overflow: hidden;
+}
+.card-sm {
+  background: var(--hpy-bg-card);
+  border-radius: var(--hpy-radius-sm);
+  box-shadow: var(--hpy-shadow-xs);
+  padding: 10px 12px;
+}
+
+/* ====== 工具类：胶囊按钮（高级蓝渐变） ====== */
+.btn-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  padding: 0 22px;
+  border-radius: var(--hpy-radius-pill);
+  font-size: 14px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: transform .15s ease, box-shadow .2s ease, opacity .2s ease;
+  user-select: none;
+}
+.btn-pill:active { transform: scale(0.97); }
+.btn-pill:disabled { opacity: 0.5; cursor: not-allowed; }
+.btn-pill.primary {
+  background: var(--hpy-grad-btn);
+  color: #fff;
+  box-shadow: 0 6px 16px rgba(22, 119, 255, 0.24);
+}
+.btn-pill.primary:active { box-shadow: 0 3px 10px rgba(22, 119, 255, 0.20); }
+.btn-pill.outline {
+  background: #fff;
+  color: var(--hpy-primary);
+  border: 1.5px solid var(--hpy-primary);
+  font-weight: 700;
+}
+.btn-pill.ghost {
+  background: var(--hpy-primary-soft);
+  color: var(--hpy-primary);
+  font-weight: 700;
+}
+.btn-pill.small {
+  height: 28px;
+  padding: 0 14px;
+  font-size: 12px;
+  letter-spacing: 0.2px;
+}
+.btn-pill.tall {
+  height: 46px;
+  padding: 0 28px;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+/* ====== 工具类：标签胶囊 ====== */
+.tag-capsule {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 20px;
+  padding: 0 10px;
+  border-radius: var(--hpy-radius-pill);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  line-height: 20px;
+  white-space: nowrap;
+}
+.tag-capsule.blue { background: var(--hpy-primary); color: #fff; }
+.tag-capsule.orange { background: var(--hpy-orange); color: #fff; }
+.tag-capsule.red { background: var(--hpy-red); color: #fff; }
+.tag-capsule.green { background: var(--hpy-green); color: #fff; }
+.tag-capsule.gold { background: var(--hpy-gold); color: #fff; }
+.tag-capsule.gray { background: #F2F3F5; color: var(--hpy-text-2); }
+.tag-capsule.soft-blue { background: var(--hpy-primary-soft); color: var(--hpy-primary); }
+
+/* ====== 工具类：Hero 渐变大卡 ====== */
+.hero-card {
+  background: var(--hpy-grad-hero);
+  border-radius: var(--hpy-radius-xl);
+  padding: 22px 20px;
+  margin: 14px 12px;
+  box-shadow: var(--hpy-shadow-md);
+  position: relative;
+  overflow: hidden;
+}
+.hero-card::before {
+  content: "";
+  position: absolute;
+  top: -40%;
+  right: -15%;
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, rgba(22, 119, 255, 0.10), rgba(22, 119, 255, 0) 65%);
+  pointer-events: none;
+}
+
+/* ====== 工具类：圆形图标底（功能入口） ====== */
+.icon-circle {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--hpy-grad-icon);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--hpy-primary);
+  flex-shrink: 0;
+}
+.icon-circle.lg {
+  width: 56px;
+  height: 56px;
+}
+.icon-circle.xl {
+  width: 80px;
+  height: 80px;
+  box-shadow: 0 4px 14px rgba(22, 119, 255, 0.16);
+}
+
+/* ====== 工具类：文字 ====== */
+.big-price {
+  color: var(--hpy-red);
+  font-weight: var(--hpy-fw-bold);
+  font-size: 22px;
+  line-height: 1;
+  letter-spacing: 0.2px;
+}
+.big-price small {
+  font-size: 13px;
+  font-weight: var(--hpy-fw-semi);
+  margin-right: 2px;
+}
+.price {
+  color: var(--hpy-red);
+  font-weight: var(--hpy-fw-semi);
+}
+.price .symbol {
+  font-size: 0.85em;
+  margin-right: 1px;
+}
+.text-muted { color: var(--hpy-text-3); }
+.text-sub { color: var(--hpy-text-2); }
+.text-main { color: var(--hpy-text-1); font-weight: var(--hpy-fw-semi); }
+
+/* ====== 工具类：商品网格 2 列 ====== */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  padding: 0 12px 12px;
+}
+.product-card {
+  background: var(--hpy-bg-card);
+  border-radius: var(--hpy-radius-lg);
+  box-shadow: var(--hpy-shadow-sm);
+  padding: 10px 10px 12px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  transition: transform .15s ease, box-shadow .2s ease;
+}
+.product-card:active {
+  transform: translateY(1px);
+  box-shadow: var(--hpy-shadow-xs);
+}
+.product-card .tag {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 2;
+}
+.product-card .thumb {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: var(--hpy-radius-md);
+  background: var(--hpy-primary-soft);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+  position: relative;
+}
+.product-card .thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.product-card .thumb .placeholder-char {
+  font-size: 52px;
+  font-weight: 800;
+  color: var(--hpy-primary);
+  opacity: 0.35;
+  letter-spacing: 2px;
+}
+.product-card .name {
+  font-size: 14px;
+  font-weight: var(--hpy-fw-semi);
+  color: var(--hpy-text-1);
+  line-height: 1.35;
+  margin-bottom: 6px;
+  min-height: 38px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.product-card .meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: auto;
+}
+.product-card .meta .qty-btn {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--hpy-grad-primary);
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  line-height: 1;
+  font-weight: 700;
+  border: none;
+  box-shadow: 0 3px 8px rgba(22, 119, 255, 0.25);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+.product-card .meta .price {
+  font-size: 18px;
+  font-weight: var(--hpy-fw-bold);
+  color: var(--hpy-red);
+}
+.product-card .meta .price small {
+  font-size: 12px;
+  margin-right: 1px;
+}
+.product-card .stock {
+  font-size: 11px;
+  color: var(--hpy-text-3);
+  margin-bottom: 4px;
+}
+
+/* ====== 分类胶囊横滚 ====== */
+.chips-scroll {
+  display: flex;
+  gap: 8px;
+  padding: 10px 12px 0;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.chips-scroll::-webkit-scrollbar { display: none; }
+.chip {
+  height: 30px;
+  padding: 0 14px;
+  border-radius: var(--hpy-radius-pill);
+  font-size: 13px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  background: #fff;
+  color: var(--hpy-text-2);
+  border: 1px solid var(--hpy-line);
+  box-shadow: var(--hpy-shadow-xs);
+}
+.chip.active {
+  background: var(--hpy-grad-primary);
+  color: #fff;
+  border-color: transparent;
+  box-shadow: 0 3px 10px rgba(22, 119, 255, 0.22);
+}
+
+/* ====== 底部 TabBar ====== */
+.tabbar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #fff;
+  height: 58px;
+  padding-bottom: env(safe-area-inset-bottom);
+  border-top: 1px solid var(--hpy-line);
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  z-index: 100;
+}
+.tabbar .tab-item {
+  flex: 1;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  font-size: 11px;
+  color: var(--hpy-text-3);
+  font-weight: 500;
+  position: relative;
+}
+.tabbar .tab-item.active {
+  color: var(--hpy-primary);
+  font-weight: 700;
+}
+.tabbar .tab-item.active::after {
+  content: "";
+  position: absolute;
+  top: 6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 18px;
+  height: 3px;
+  border-radius: 999px;
+  background: var(--hpy-grad-primary);
+}
+.tabbar .tab-item svg {
+  width: 22px;
+  height: 22px;
+}
+
+/* ====== 商品详情 价格与 SKU ====== */
+.info-card {
+  background: #fff;
+  margin: 10px 12px;
+  border-radius: var(--hpy-radius-lg);
+  padding: 14px 16px;
+  box-shadow: var(--hpy-shadow-sm);
+}
+.stepper-wrap { padding: 12px 16px; }
+.sku-chip {
+  display: inline-block;
+  margin: 0 10px 10px 0;
+  padding: 8px 16px;
+  border-radius: var(--hpy-radius-pill);
+  border: 1.5px solid var(--hpy-primary-lines);
+  background: #fff;
+  color: var(--hpy-text-1);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.2s ease;
+  line-height: 1.4;
+}
+.sku-chip.active {
+  border-color: var(--hpy-primary);
+  background: var(--hpy-primary-soft);
+  color: var(--hpy-primary);
+  box-shadow: 0 0 0 3px rgba(22, 119, 255, 0.08) inset;
+}
+.name {
+  font-size: 17px;
+  font-weight: var(--hpy-fw-bold);
+  color: var(--hpy-text-1);
+  line-height: 1.4;
+}
+.sku-code {
+  font-size: 12px;
+  color: var(--hpy-text-3);
+  margin-top: 6px;
+  letter-spacing: 0.3px;
+}
+
+/* ====== 自提码大卡 ====== */
+.pickup-code-card {
+  background: var(--hpy-grad-code);
+  border: 2px solid var(--hpy-primary);
+  border-radius: var(--hpy-radius-lg);
+  padding: 20px 18px;
+  text-align: center;
+  box-shadow: var(--hpy-shadow-sm);
+}
+.pickup-code-card .label {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--hpy-primary);
+  letter-spacing: 1px;
+  margin-bottom: 10px;
+}
+.pickup-code-card .code {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 34px;
+  font-weight: 800;
+  letter-spacing: 4px;
+  color: var(--hpy-primary);
+  line-height: 1;
+  margin-bottom: 10px;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.7);
+}
+.pickup-code-card .tip {
+  font-size: 12px;
+  color: var(--hpy-text-3);
+  letter-spacing: 0.3px;
+}
+
+/* ====== 动画 ====== */
+@keyframes hpy-fade-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes hpy-pop {
+  0% { transform: scale(0.6); opacity: 0; }
+  60% { transform: scale(1.08); opacity: 1; }
+  100% { transform: scale(1); }
+}
+.fade-in { animation: hpy-fade-in 0.35s ease both; }
+.pop { animation: hpy-pop 0.45s cubic-bezier(0.2, 0.9, 0.3, 1.2) both; }
+
+/* ====== 空状态 ====== */
+.empty-wrap {
+  padding: 80px 20px 40px;
+  text-align: center;
+  color: var(--hpy-text-3);
+}
+.empty-wrap .empty-icon {
+  width: 96px;
+  height: 96px;
+  margin: 0 auto 16px;
+  border-radius: 50%;
+  background: var(--hpy-grad-icon);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--hpy-primary);
+}
+.empty-wrap .empty-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--hpy-text-1);
+  margin-bottom: 4px;
+}
+.empty-wrap .empty-sub {
+  font-size: 13px;
+  color: var(--hpy-text-3);
+}
+
+/* ====== 修复 Vant 组件统一风格（覆盖部分默认色）====== */
+:root:root {
+  --van-button-primary-background: var(--hpy-grad-btn);
+  --van-button-primary-border-color: transparent;
+  --van-nav-bar-background: #fff;
+  --van-stepper-active-color: var(--hpy-primary);
+  --van-submit-bar-button-background: var(--hpy-grad-btn);
+  --van-tag-primary-color: var(--hpy-primary);
+  --van-progress-color: var(--hpy-primary);
+  --van-steps-active-icon-background-color: var(--hpy-primary);
+  --van-steps-active-line-color: var(--hpy-primary);
+}
+
+.van-nav-bar__title {
+  font-weight: 700 !important;
+  color: var(--hpy-text-1) !important;
+}
+.van-button--primary {
+  border: none !important;
+  box-shadow: 0 4px 14px rgba(22, 119, 255, 0.20) !important;
+}
