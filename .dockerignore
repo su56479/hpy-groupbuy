@@ -1,0 +1,15 @@
+node_modules
+.git
+mobile/dist
+admin/dist
+server/public/m
+server/public/admin
+server/data
+server/uploads
+*.log
+.DS_Store
+.env
+.env.local
+.env.*.local
+.tmp
+.cache
