@@ -1,0 +1,13 @@
+providers = ["node"]
+
+[phases.setup]
+nixpkgsArchive = "478b0b72c4e4b5a1f5f8f2b2d2e0c6a8c0a9b8c7"
+
+[phases.install]
+cmds = ["echo '依赖安装将在 build 阶段执行'"]
+
+[phases.build]
+cmds = ["bash build-all.sh"]
+
+[start]
+cmd = "cd server && node src/index.js"
